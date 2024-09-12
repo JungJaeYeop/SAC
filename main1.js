@@ -7,26 +7,6 @@
  Hello WebComponent
  </div>
  `
- class Main extends HTMLElement {
- constructor () {
- super()
- this._shadowRoot = this.attachShadow({ mode: 'open' })
- this._shadowRoot.appendChild(template.content.cloneNode(true))
- this._root = this._shadowRoot.getElementById('root')
-
- this._eChart = null
- }
-
- onCustomWidgetResize(width, height){
-	this.render();
- }
-
-onCustomWidgetAfterUpdate(changedProps){
-	this.render();
-}
-
-onCustomWidgetDestroy(){
-}
 
 var getScriptPromisify = (src) => {
 	return new Promise((resolve) => {
@@ -51,12 +31,34 @@ var parseMetadata = metadata =>{
 	return dimensions, measures, dimensionsMap, measureMap }
 }
 
+
+ class Main extends HTMLElement {
+ constructor () {
+ super()
+ this._shadowRoot = this.attachShadow({ mode: 'open' })
+ this._shadowRoot.appendChild(template.content.cloneNode(true))
+ this._root = this._shadowRoot.getElementById('root')
+
+ this._eChart = null
+ }
+
+ onCustomWidgetResize(width, height){
+	this.render();
+ }
+
+onCustomWidgetAfterUpdate(changedProps){
+	this.render();
+}
+
+onCustomWidgetDestroy(){
+}
+
 async render () {
 	const dataBinding = this.dataBinding;
 	if( !dataBinding || dataBinding.state !== 'success' ){
 		return
 	}
-    await getScriptPromisify('https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js')
+    await getScriptPromisify('https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js')
 
 	const { data, metadata } = dataBinding
 	const { dimensions, measures } = parseMetadata(metadata)
