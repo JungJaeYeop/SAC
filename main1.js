@@ -26,9 +26,10 @@ onCustomWidgetAfterUpdate(changedProps){
 onCustomWidgetDestroy(){
 }
 
-render(){
-	this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
-}
+render () {
+      this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`
+    }
+
 
 }
  customElements.define('com-sap-sac-exercise-jjy01-main', Main)
